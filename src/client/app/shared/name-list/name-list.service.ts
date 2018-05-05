@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { catchError } from 'rxjs/operators/catchError';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 // import { tap } from 'rxjs/operators/tap'; // for debugging
 
 /**
@@ -38,7 +37,7 @@ export class NameListService {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return new ErrorObservable(errMsg);
+    return throwError(errMsg);
   }
 }
 
